@@ -1,6 +1,5 @@
 '''
 Project 3 - Text Adventure - Spring 2023  
-
 Author: John Lewis - lewis63
 
 Modified by:  Joshua Gao (joshuagao)

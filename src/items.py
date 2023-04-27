@@ -50,7 +50,6 @@ class Items:
                 contents = []
             else:
                 contents = items_file.readline().split()
-                print(contents)
                 if contents[0] == 'nothing':
                     contents = []
             

@@ -46,7 +46,7 @@ class Game:
                        'photograph', 'ring', 'unicorn'}
         
         # The containers set includes all items that can store other items.
-        self.containers = {'cabinet', 'chest', 'clock'}
+        self.containers = {'cabinet', 'chest', 'clock', 'drawer', 'refrigerator'} #NEWSTUFF - added custom containers
         
         # The verbs set includes all recognized verbs.
         self.verbs = {'climb', 'close', 'dig', 'drop', 'examine', 'go',
@@ -87,6 +87,9 @@ class Game:
         for word in words:
             if word in {'the', 'a', 'an'}:
                 words.remove(word)
+
+        if len(words) == 0: #NEWSTUFF - added checker for case where input is only "the, a, an" resulting in empty string
+            return "invalid"
        
         # Replace any alias word with the standard word.
         # For example, replace 'n' with 'north'.
@@ -194,8 +197,9 @@ class Game:
             print("I don't know that direction.")
         elif words[1] in routes:
             self.current_room = routes[words[1]]
-            if "cornfield" in current_room: #NEWSTUFF - added damage mechanic for walking in cornfields
-                print("The thick, unruly corn stalks scratch you.")
+            if "cornfield" in self.current_room: #NEWSTUFF - added damage mechanic for walking in cornfields
+                random = ["The thick, unruly corn stalks scratch you.", "Ow. A branch hits your head.", "You trip over an overgrown root."]
+                print(random.choice())
                 self.player.take_damage(3)
             self.print_room(self.current_room)
         elif self.current_room == 'beach4' and words[1] == 'north':
@@ -437,7 +441,7 @@ class Game:
                 print('When you touch the scarecrow a necklace falls from its stuffing.')
         elif words[1] == 'fireplace': #NEWSTUFF - added fireplace damage mechanic when touched
             print("Ow, that's hot!")
-            self.player.take_damage()
+            self.player.take_damage(30)
         else:
             responses = ['Okay...', 'If you say so...',
                          'Hey, whatever floats your boat.']

@@ -1,3 +1,4 @@
+import sys
 
 class Player:
     
@@ -12,11 +13,11 @@ class Player:
     
     def take_damage(self, damage):
         self.health = self.health - damage
-        print(f"Took {damage} damage.")
+        print(f"You took {damage} damage.")
         if self.health <= 0:
-            print("YOU DEAD!")
+            print("You died.")
+            sys.exit()
             
-    
     def gain_health(self, amount):
         self.health = self.health + amount
         if self.health > 100:
