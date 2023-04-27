@@ -25,6 +25,8 @@ class Game:
         self.rooms = Rooms('rooms_data.txt')
         self.routes = Routes('routes_data.txt')
         self.items = Items('items_data.txt')
+
+        self.foods = self.items.get_foods()
                 
         self.current_room = 'library'
         
@@ -200,7 +202,7 @@ class Game:
             if "cornfield" in self.current_room: #NEWSTUFF - added damage mechanic for walking in cornfields
                 random = ["The thick, unruly corn stalks scratch you.", "Ow. A branch hits your head.", "You trip over an overgrown root."]
                 print(random.choice())
-                self.player.take_damage(3)
+                self.player.process_hp(-3)
             self.print_room(self.current_room)
         elif self.current_room == 'beach4' and words[1] == 'north':
             print('The rocks prevent you from simply walking north.')
@@ -213,7 +215,7 @@ class Game:
         elif self.current_room in {'cornfield1', 'cornfield2', 'cornfield3', 'cornfield4', 'cornfield5'}:
             # loop to same room if in the cornfield maze and it's not a valid path:
             print("The thick, unruly corn stalks scratch you.")
-            self.player.take_damage(3) #NEWSTUFF - added damage mechanic for walking in cornfields
+            self.player.process_hp(-3) #NEWSTUFF - added damage mechanic for walking in cornfields
 
             self.print_room(self.current_room)            
         else:
@@ -441,7 +443,7 @@ class Game:
                 print('When you touch the scarecrow a necklace falls from its stuffing.')
         elif words[1] == 'fireplace': #NEWSTUFF - added fireplace damage mechanic when touched
             print("Ow, that's hot!")
-            self.player.take_damage(30)
+            self.player.process_hp(-30)
         else:
             responses = ['Okay...', 'If you say so...',
                          'Hey, whatever floats your boat.']
@@ -460,7 +462,7 @@ class Game:
             print("I don't see that here.")
         elif self.current_room == 'beach4' and words[1] == 'rocks':
             print("It's dangerous, but you scramble over the rocks... In the process you take some damage.\n") #NEWSTUFF - added damage from climbing rocks
-            self.player.take_damage(15)
+            self.player.process_hp(-15)
             self.current_room = 'cove'
             self.print_room(self.current_room)
         elif self.current_room == 'cove' and words[1] == 'rocks':
@@ -577,15 +579,16 @@ class Game:
         elif words[1] not in self.player.inventory and words[1] not in room.items_in_room:
             #CONTINUE - add function to room class that can check if an item is in any open container
             print("I don't see that here.")
-        elif words[1] in ['can', 'bottle']:
+        elif words[1] in self.foods:
             if words[1] not in self.player.inventory:
                 print(f"You're not holding the {words[1]}.")
             else:
-                #item = self.items.get_item(words[1])
+                food = self.items.get_item(words[1])
                 print("Yum. ", end="")
-                self.player.gain_health(50)
+                self.player.eat(food)
                 #CONTINUE HERE!
         else:
+            print(self.foods)
             print("You can't eat that!")
             
     def process_health(self):

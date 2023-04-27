@@ -11,22 +11,28 @@ class Player:
     def change_capacity(self, capacity):
         self.capacity = capacity
     
-    def take_damage(self, damage):
-        self.health = self.health - damage
-        print(f"*You took {damage} damage*")
-        if self.health <= 0:
-            print("*You died*")
-            sys.exit()
-            
-    def gain_health(self, amount):
-        note = ""
-        self.health = self.health + amount
-        if self.health > 100:
-            amount = amount - (self.health - 100)
-            self.health = 100
-            note += " (You are at full health)"
-        print(f"*Gained {amount} health" + note + "*")
+    def process_hp(self, amount):
+        if amount >= 0:
+            note = ""
+            self.health = self.health + amount
+            if self.health > 100: #Check for health being gained past 100 (max)
+                amount = amount - (self.health - 100) #Find how much health to gain to reach exactly 100
+                self.health = 100
+                note += " (You are at full health)"
+            print(f"*Gained {amount} health" + note + "*")
+        else:
+            amount = abs(amount)
+            self.health = self.health - amount
+            print(f"*You took {amount} damage*")
+            if self.health <= 0:
+                print("*You died*")
+                sys.exit()
     
+    def eat(self, food):
+        amount = food.hp_amount
+        self.process_hp(amount)
+        self.remove_item(food.name)
+
     def add_item(self, item):
         self.inventory.add(item)
     
@@ -42,7 +48,7 @@ class Player:
         if len(self.inventory) == 0:
             print("*You're not carrying anything*")
         else:
-            print('*You are currently carrying:')
+            print('You are currently carrying:')
             for item_name in self.inventory:
                 item = items_object.get_item(item_name)
                 print('   ' + item.full_name)

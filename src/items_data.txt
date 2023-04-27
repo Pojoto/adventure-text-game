@@ -177,13 +177,15 @@ canned food
 0
 chill
 Who knows how long this can has been here, or what's inside?
+10
 
 bottle
-bottle of liquid
+bottle of food
 1
 0
 chill
 What could this orange, liquidy substance be...?
+20
 
 fireplace
 fireplace
