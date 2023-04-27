@@ -73,3 +73,4 @@ class Items:
         for item_name in items:
             total += self.items_dict[item_name].weight
         return total
+

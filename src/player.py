@@ -13,17 +13,19 @@ class Player:
     
     def take_damage(self, damage):
         self.health = self.health - damage
-        print(f"You took {damage} damage.")
+        print(f"*You took {damage} damage*")
         if self.health <= 0:
-            print("You died.")
+            print("*You died*")
             sys.exit()
             
     def gain_health(self, amount):
+        note = ""
         self.health = self.health + amount
         if self.health > 100:
             amount = amount - (self.health - 100)
             self.health = 100
-        print(f"Gained {amount} health.")
+            note += " (You are at full health)"
+        print(f"*Gained {amount} health" + note + "*")
     
     def add_item(self, item):
         self.inventory.add(item)
@@ -38,10 +40,10 @@ class Player:
     
     def process_inventory(self, items_object):
         if len(self.inventory) == 0:
-            print("You're not carrying anything.")
+            print("*You're not carrying anything*")
         else:
-            print('You are currently carrying:')
+            print('*You are currently carrying:')
             for item_name in self.inventory:
                 item = items_object.get_item(item_name)
                 print('   ' + item.full_name)
-            
+        

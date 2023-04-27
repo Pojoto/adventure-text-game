@@ -39,7 +39,7 @@ class Game:
             'u' : 'up', 'd' : 'down', 'l' : 'look', 'ex' : 'examine', 'i' : 'inventory',
             't' : 'take', 'get' : 'take', 'stairs' : 'staircase', 'coin': 'doubloon',
             'photo' : 'photograph', 'picture' : 'photograph', 'pic' : 'photograph',
-            'fridge' : 'refrigerator', 'fire' : 'fireplace'} #NEWSTUFF - added 'fridge', 'fire', aliases
+            'fridge' : 'refrigerator', 'fire' : 'fireplace', 'food' : 'can'} #NEWSTUFF - added 'fridge', 'fire', 'food' aliases
         
         # The curios set includes all items that must be put into the cabinet.
         self.curios = {'candlestick', 'doll', 'doubloon', 'necklace',
@@ -569,13 +569,24 @@ class Game:
                 
                 
     def process_eat(self, words): #NEWSTUFF - added process_eat function for eat verb
-        if 'can' or 'bottle' not in self.player.inventory:
-            print("There's nothing for you to eat.")
-        elif len(words) == 1:
+        room = self.rooms.get_room(self.current_room)
+        if len(words) == 1:
             print("What do you want to eat?")
+        elif words[1] not in self.items.items_dict:
+            print("I don't know what that is.")
+        elif words[1] not in self.player.inventory and words[1] not in room.items_in_room:
+            #CONTINUE - add function to room class that can check if an item is in any open container
+            print("I don't see that here.")
+        elif words[1] in ['can', 'bottle']:
+            if words[1] not in self.player.inventory:
+                print(f"You're not holding the {words[1]}.")
+            else:
+                #item = self.items.get_item(words[1])
+                print("Yum. ", end="")
+                self.player.gain_health(50)
+                #CONTINUE HERE!
         else:
-            self.player.gain_health(10)
-            ###CONTINUE HERE!
+            print("You can't eat that!")
             
     def process_health(self):
         print(f"You have {self.player.health} health.")
