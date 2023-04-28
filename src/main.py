@@ -9,9 +9,12 @@ multiple rooms and items.
 '''
 
 from game import Game
+import os
 
 
 def main():
+
+    print(os.getcwd())
 
     game = Game()
     
