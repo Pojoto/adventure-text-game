@@ -10,7 +10,7 @@ Experiment with commands and use clues to figure out how to finish the game... a
 
 ## To Play
 
-Run __project3.py__ as normal
+Run __main.py__ as normal
 
 Start off by taking and reading the info book through:
 ```
