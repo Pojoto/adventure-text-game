@@ -13,6 +13,7 @@ the user and then processing them.
 from rooms import Rooms
 from routes import Routes
 from items import *
+from random import randrange
 
 from player import Player
 
@@ -24,7 +25,7 @@ class Game:
 
         self.rooms = Rooms('rooms_data.txt')
         self.routes = Routes('routes_data.txt')
-        self.items = Items('object_data')
+        self.items = Items('all_item_data')
 
         self.foods = self.items.get_foods()
 
@@ -43,7 +44,7 @@ class Game:
             'u' : 'up', 'd' : 'down', 'l' : 'look', 'ex' : 'examine', 'i' : 'inventory',
             't' : 'take', 'get' : 'take', 'stairs' : 'staircase', 'coin': 'doubloon',
             'photo' : 'photograph', 'picture' : 'photograph', 'pic' : 'photograph',
-            'fridge' : 'refrigerator', 'fire' : 'fireplace', 'food' : 'can'} #NEWSTUFF - added 'fridge', 'fire', 'food' aliases
+            'fridge' : 'refrigerator', 'fire' : 'fireplace', 'can' : 'canned food'} #NEWSTUFF - added 'fridge', 'fire', 'food' aliases
         
         # The curios set includes all items that must be put into the cabinet.
         self.curios = {'candlestick', 'doll', 'doubloon', 'necklace',
@@ -199,11 +200,23 @@ class Game:
         elif words[1] not in self.directions:
             print("I don't know that direction.")
         elif words[1] in routes:
-            self.current_room = routes[words[1]]
+
+            if self.current_room == "kitchen":
+                fridge = self.items.get_item("refrigerator")
+                fridge.close()
+
+            self.current_room = routes[words[1]] #transition to new room
+
             if "cornfield" in self.current_room: #NEWSTUFF - added damage mechanic for walking in cornfields
                 random = ["The thick, unruly corn stalks scratch you.", "Ow. A branch hits your head.", "You trip over an overgrown root."]
                 print(random.choice())
                 self.player.process_hp(-3)
+            elif self.current_room == "kitchen":
+                fridge = self.items.get_item("refrigerator")
+                fridge.fill_random(self.foods)
+                #CONTINUETODO problem - 'take canned food' is not recognized. also we need to make sure a default value of say 4 items is always randomzied,
+                #not just how many are in the fridge. if there's only 2 items in the fridge we come back adn only 2 items get randomized. use 'randomstuff'
+
             self.print_room(self.current_room)
         elif self.current_room == 'beach4' and words[1] == 'north':
             print('The rocks prevent you from simply walking north.')
@@ -218,7 +231,7 @@ class Game:
             print("The thick, unruly corn stalks scratch you.")
             self.player.process_hp(-3) #NEWSTUFF - added damage mechanic for walking in cornfields
 
-            self.print_room(self.current_room)            
+            self.print_room(self.current_room)     
         else:
             print("You can't go that way from here.")
     
@@ -314,7 +327,6 @@ class Game:
         elif words[1] not in room.items_in_room and words[1] not in self.player.inventory: #NEWSTUFF - self.inventory -> self.player.inventory
             print("I don't see that here.")
         elif words[1] not in self.containers:
-            print(self.containers)
             print("You can't open that.")
         else:
             item = self.items.get_item(words[1])

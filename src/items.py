@@ -41,6 +41,22 @@ class Container(Item):
         self.capacity = capacity  
         self.contents = contents  # a list of item names held by this item
 
+    def close(self):
+        self.status = "closed"
+    
+    def open(self):
+        self.status = "open"
+    
+    def fill_random(self, foods):
+
+        #self.contents = [(self.contents,) for x in self.contents]
+
+        for i, item_name in enumerate(self.contents):
+            self.contents[i] = foods.pop()
+            foods.add(self.contents[i])
+
+
+
 #TODOO -- make funciton that can read normal itme files and put it in all below 3 function
 
 def read_foods(objects_dict, foods_file_name):
@@ -70,7 +86,7 @@ def read_containers(objects_dict, containers_file_name):
             description = containers_file.readline().strip()
             capacity = int(containers_file.readline().strip())
             contents = containers_file.readline().split()
-            if contents == "nothing":
+            if contents[0] == "nothing":
                 contents = []
 
             objects_dict[name] = Container(name, full_name, weight,
@@ -100,17 +116,17 @@ The Items class is a collection of all items in the game.
 '''
 class Items:
     
-    def __init__(self, objects_directory):
+    def __init__(self, all_items_folder):
         
         self.items_dict = {}  # maps an item name to the corresponding Item object
 
-        path = f"{objects_directory}\\{filenames[0]}"
+        path = f"{all_items_folder}\\{filenames[0]}"
         read_normal_items(self.items_dict, path)
 
-        path = f"{objects_directory}\\{filenames[1]}"
+        path = f"{all_items_folder}\\{filenames[1]}"
         read_containers(self.items_dict, path)
         
-        path = f"{objects_directory}\\{filenames[2]}"
+        path = f"{all_items_folder}\\{filenames[2]}"
         read_foods(self.items_dict, path)
 
         

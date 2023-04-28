@@ -11,8 +11,8 @@ refrigerator
 10
 closed
 A small refrigerator for storing your delicious meals...
-3
-random
+8
+randomfood randomfood randomfood randomfood
 
 clock
 grandfather clock
