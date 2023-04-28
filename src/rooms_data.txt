@@ -90,7 +90,7 @@ unicorn
 
 kitchen
 Kitchen
-Once upon a time fine meals were prepared in this kitchen. Now the cabinets are ruined and the appliances gone. There is an arched opening on the north wall. To the east there seems to be a bathroom.
+Once upon a time fine meals were prepared in this kitchen. Now the cabinets are ruined and most appliances are gone. There is an arched opening on the north wall. To the east there seems to be a bathroom. *The refrigerator sparkles*
 spoon refrigerator
 
 library

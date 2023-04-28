@@ -12,7 +12,7 @@ refrigerator
 closed
 A small refrigerator for storing your delicious meals...
 8
-randomfood randomfood randomfood randomfood
+nothing
 
 clock
 grandfather clock

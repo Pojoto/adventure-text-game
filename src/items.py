@@ -1,4 +1,5 @@
 import os
+from random import randrange
 
 #names of all the files in the object_data directory 
 filenames = ["normal_items_data.txt", "containers_data.txt", "foods_data.txt"]
@@ -47,13 +48,19 @@ class Container(Item):
     def open(self):
         self.status = "open"
     
+    def empty(self):
+        self.contents = []
+    
     def fill_random(self, foods):
 
         #self.contents = [(self.contents,) for x in self.contents]
 
-        for i, item_name in enumerate(self.contents):
-            self.contents[i] = foods.pop()
-            foods.add(self.contents[i])
+        random_range = range(randrange(1, 3))
+
+        for _ in random_range:
+            random_item = foods.pop()
+            self.contents.append(random_item)
+            foods.add(random_item)
 
 
 

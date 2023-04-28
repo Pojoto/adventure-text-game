@@ -204,6 +204,7 @@ class Game:
             if self.current_room == "kitchen":
                 fridge = self.items.get_item("refrigerator")
                 fridge.close()
+                fridge.empty()
 
             self.current_room = routes[words[1]] #transition to new room
 
@@ -214,8 +215,7 @@ class Game:
             elif self.current_room == "kitchen":
                 fridge = self.items.get_item("refrigerator")
                 fridge.fill_random(self.foods)
-                #CONTINUETODO problem - 'take canned food' is not recognized. also we need to make sure a default value of say 4 items is always randomzied,
-                #not just how many are in the fridge. if there's only 2 items in the fridge we come back adn only 2 items get randomized. use 'randomstuff'
+                #CONTINUETODO problem - deal with duplicate food items! this is a large scale problem
 
             self.print_room(self.current_room)
         elif self.current_room == 'beach4' and words[1] == 'north':
