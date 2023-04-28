@@ -1,0 +1,45 @@
+canned food
+canned food
+2
+chill
+Who knows how long this can has been here, or what's inside?
+-10
+
+apple
+apple
+1
+chill
+Red, shiny, and ready to keep doctors away.
+5
+
+onion
+onion
+1
+chill
+It can make a grown man cry.
+0
+
+
+banana
+banana
+1
+chill
+It's a little mushy.
+-5
+
+rice 
+bag of rice
+3
+chill
+It appears to be a heavy bag of Jasmine rice. 
+10
+
+popsicle
+popsicle
+1
+chill
+It's an orange color - and how is it not melted?
+-3
+
+
+

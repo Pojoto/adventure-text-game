@@ -1,0 +1,39 @@
+drawer
+dusty drawer
+10
+closed
+A dusty drawer that looks like it's been unused for years.
+1
+nothing
+
+refrigerator 
+refrigerator
+10
+closed
+A small refrigerator for storing your delicious meals...
+3
+random
+
+clock
+grandfather clock
+10
+closed
+The clock is ornately carved, six feet tall, and broken. It's pendulum is missing.
+1
+nothing
+
+cabinet
+curio cabinet
+10
+locked
+It's a tall glass cabinet designed to display treasured keepsakes.
+7
+nothing
+
+chest
+half-buried chest
+10
+buried
+The chest is mostly buried in the sand.
+7
+doubloon
