@@ -24,7 +24,7 @@ class Game:
 
         self.rooms = Rooms('rooms_data.txt')
         self.routes = Routes('routes_data.txt')
-        self.items = Items('items_data.txt')
+        self.items = Items('object_data')
 
         self.foods = self.items.get_foods()
                 
