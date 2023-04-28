@@ -69,7 +69,7 @@ def read_containers(objects_dict, containers_file_name):
             status = containers_file.readline().strip()
             description = containers_file.readline().strip()
             capacity = int(containers_file.readline().strip())
-            contents = containers_file.readline().strip()
+            contents = containers_file.readline().split()
             if contents == "nothing":
                 contents = []
 
@@ -102,16 +102,16 @@ class Items:
     
     def __init__(self, objects_directory):
         
-        self.objects_dict = {}  # maps an item name to the corresponding Item object
+        self.items_dict = {}  # maps an item name to the corresponding Item object
 
-        path = objects_directory + filenames[0]
-        read_normal_items(self.objects_dict, path)
+        path = f"{objects_directory}\\{filenames[0]}"
+        read_normal_items(self.items_dict, path)
 
-        path = objects_directory + filenames[1]
-        read_containers(self.objects_dict, path)
+        path = f"{objects_directory}\\{filenames[1]}"
+        read_containers(self.items_dict, path)
         
-        path = objects_directory + filenames[2]
-        read_foods(self.objects_dict, path)
+        path = f"{objects_directory}\\{filenames[2]}"
+        read_foods(self.items_dict, path)
 
         
     def __str__(self):
@@ -129,9 +129,9 @@ class Items:
 
     def get_containers(self):
         containers = set()
-        for item in self.items_dict.values:
+        for item in self.items_dict.values():
             if isinstance(item, Container):
-                containers.add(item)
+                containers.add(item.name)
         return containers
 
     def get_total_weight(self, items):

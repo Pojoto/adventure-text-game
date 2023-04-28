@@ -12,7 +12,7 @@ the user and then processing them.
 
 from rooms import Rooms
 from routes import Routes
-from items import Items
+from items import *
 
 from player import Player
 
@@ -27,6 +27,8 @@ class Game:
         self.items = Items('object_data')
 
         self.foods = self.items.get_foods()
+
+        self.containers = self.items.get_containers()
                 
         self.current_room = 'library'
         
@@ -48,7 +50,6 @@ class Game:
                        'photograph', 'ring', 'unicorn'}
         
         # The containers set includes all items that can store other items.
-        self.containers = {'cabinet', 'chest', 'clock', 'drawer', 'refrigerator'} #NEWSTUFF - added custom containers
         
         # The verbs set includes all recognized verbs.
         self.verbs = {'climb', 'close', 'dig', 'drop', 'examine', 'go',
@@ -286,7 +287,7 @@ class Game:
                 print("I don't see that here.")
             else:
                 print(item)
-                if item.capacity > 0 and item.status == 'open':
+                if isinstance(item, Container) and item.status == 'open':
                     self.print_container_contents(item)
 
                 painting = self.items.get_item('painting')
@@ -313,6 +314,7 @@ class Game:
         elif words[1] not in room.items_in_room and words[1] not in self.player.inventory: #NEWSTUFF - self.inventory -> self.player.inventory
             print("I don't see that here.")
         elif words[1] not in self.containers:
+            print(self.containers)
             print("You can't open that.")
         else:
             item = self.items.get_item(words[1])
