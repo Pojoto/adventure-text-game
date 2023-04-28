@@ -1,0 +1,13 @@
+can
+canned food
+1
+chill
+Who knows how long this can has been here, or what's inside?
+10
+
+bottle
+bottle of food
+1
+chill
+What could this orange, liquidy substance be...?
+20
