@@ -1,6 +1,6 @@
 # adventure-text-game
 
-###### (Project originally from CS 1024 @ VT, Professor John Lewis)
+###### (Project originally from CS 1064 @ VT, Professor John Lewis)
 
 This fun, small game runs completely on the terminal/output through text. 
 
